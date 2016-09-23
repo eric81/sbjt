@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true" scan="true" scanPeriod="60 seconds">
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<appender name="debuglog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/sbjt_debug.log</file>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5level] [%class:%line] - %m%n</pattern>
+		</encoder>
+		
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>error</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>ACCEPT</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/xhrup_debug_%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="errorlog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/sbjt_error.log</file>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%class:%line] - %m%n</pattern>
+		</encoder>
+
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>error</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/xhrup_error_%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	<root level="info"/>
+	<logger name="org.springframework.web" level="debug" />
+	<logger name="druid.sql.Statement" level="debug" />
+	<logger name="cn.news.xhresupload" level="debug" >
+		<appender-ref ref="debuglog" />
+		<appender-ref ref="errorlog" />
+	</logger>
+	
+</configuration>
