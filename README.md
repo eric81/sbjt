@@ -1,2 +1,2 @@
 # sbjt
-Spring Boot + Jpa + Thymeleaf
+Spring Boot + Jpa + Thymeleaf + logback
