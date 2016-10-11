@@ -3,4 +3,4 @@ simple app based on spring boot, can use this create stand-alone Spring applicat
 
 front end : Thymeleaf
 
-back  end : Spring Boot + Jpa + logback
+back  end : Jpa + Redis + Logback
