@@ -9,7 +9,8 @@
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$.post("/user/add", {name:'vvv', roles:'中国'}, function(data, status){alert("Data: " + data + "\nStatus: " + status);});
+	var url = "http://localhost:9090/api/user/list";
+	$.get(url, function(data){alert(data);}, "jsonp");
 });
 </script>
 </body>

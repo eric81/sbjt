@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var urls = "http://localhost:9090/api/user/modify";
+	var datas = {id:57, name:'vvv', permissions:'读取'};
+	$.post(urls, datas, function(data){alert(data);}, "jsonp");
+});
+</script>
+</body>
+</html>
