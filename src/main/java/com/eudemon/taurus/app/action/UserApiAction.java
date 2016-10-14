@@ -13,9 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.eudemon.taurus.app.entities.OperResult;
 import com.eudemon.taurus.app.entities.User;
@@ -36,7 +34,7 @@ public class UserApiAction {
 
 	@GetMapping(value = "/{id}")
 	public void get(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[user get] id=" + id);
+		logger.debug("[api user get] id=" + id);
 
 		User user = this.sv.getUser(id);
 
@@ -56,7 +54,7 @@ public class UserApiAction {
 	@GetMapping(value = "/list")
 	public void list(@PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable, HttpServletRequest request,
 			HttpServletResponse response) {
-		logger.info("[user list] pageable=" + pageable);
+		logger.info("[api user list] pageable=" + pageable);
 
 		Page<User> rs = this.sv.getUserList(pageable);
 
@@ -76,7 +74,7 @@ public class UserApiAction {
 
 	@GetMapping(value = "/delete/{id}")
 	public void delete(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[user delete] id=" + id);
+		logger.debug("[api user delete] id=" + id);
 		OperResult or = new OperResult();
 
 		this.sv.delete(id);
@@ -84,13 +82,12 @@ public class UserApiAction {
 		JasonUtils.writeJasonP(request, response, or);
 	}
 
-	@PostMapping(value = "/modify/{id}")
-	public void modify(@PathVariable int id, @RequestParam String role, @RequestParam String permissions, HttpServletRequest request,
-			HttpServletResponse response) {
-		logger.debug("[user modify] role=" + role);
+	@RequestMapping(value = "/modify")
+	public void modify(User user, HttpServletRequest request, HttpServletResponse response) {
+		logger.debug("[api user modify] user=" + user);
 		OperResult or = new OperResult();
 
-		this.sv.modify(id, role, permissions);
+		this.sv.modify(user);
 
 		JasonUtils.writeJasonP(request, response, or);
 	}
