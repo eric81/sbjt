@@ -32,15 +32,19 @@ public class UserService {
 		User us = userDao.saveAndFlush(user);
 		user.setId(us.getId());
 	}
-
-	public void modify(long id, String role, String permissions) {
-		User user = userDao.findOne(id);
-		user.setRoles(role);
-		user.setPermissions(permissions);
+	
+	public void modify(User user) {
 		userDao.saveAndFlush(user);
 	}
 
 	public void delete(long id) {
 		userDao.delete(id);
+	}
+	
+	public void modify(long id, String role, String permissions) {
+		User user = userDao.findOne(id);
+		user.setRoles(role);
+		user.setPermissions(permissions);
+		userDao.saveAndFlush(user);
 	}
 }
