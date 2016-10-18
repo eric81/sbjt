@@ -11,7 +11,7 @@
 $(function() {
 	var urls = "http://localhost:9090/api/user/add";
 	var datas = {name:'vvv', roles:'中国'};
-	$.post(urls, datas, function(data){alert(data);}, "jsonp");
+	$.post(urls, datas, function(data){alert(JSON.stringify(data));}, "jsonp");
 });
 </script>
 </body>
