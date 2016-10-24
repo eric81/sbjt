@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>user list</title>
+</head>
+<body>
+	<h1 layout:fragment="pageTitle">User List</h1>
+	<div layout:fragment="content">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Roles</th>
+					<th>Permissions</th>
+					<th>RegisterDate</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user:${rs.content}">
+					<td th:text="${user.id}">1,001</td>
+					<td th:text="${user.name}">Lorem</td>
+					<td th:text="${user.roles}">ipsum</td>
+					<td th:text="${user.permissions}">dolor</td>
+					<td th:text="${user.registerDate}">sit</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
