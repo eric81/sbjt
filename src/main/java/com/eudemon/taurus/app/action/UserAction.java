@@ -32,10 +32,11 @@ public class UserAction {
 	private UserService sv;
 
 	@GetMapping(value = "/{id}")
-	public User get(@PathVariable int id) {
+	public String get(@PathVariable int id, ModelMap model) {
 		logger.debug("[user get] id=" + id);
 		User user = this.sv.getUser(id);
-		return user;
+		model.addAttribute("user", user);
+		return "user/detail";
 	}
 
 	/**

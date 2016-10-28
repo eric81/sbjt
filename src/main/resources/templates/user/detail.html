@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>user list</title>
+</head>
+<body>
+	<h1 layout:fragment="pageTitle">用户信息</h1>
+	<div layout:fragment="content">
+		<form class="form-horizontal">
+			<fieldset>
+				<div class="control-group">
+					<!-- Text input-->
+					<label class="control-label" for="input01">Text input</label>
+					<div class="controls">
+						<input type="text" placeholder="placeholder" class="input-xlarge">
+						<p class="help-block">Supporting help text</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Select Basic -->
+					<label class="control-label">Select - Basic</label>
+					<div class="controls">
+						<select class="input-xlarge">
+							<option>Enter</option>
+							<option>Your</option>
+							<option>Options</option>
+							<option>Here!</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Checkboxes</label>
+					<div class="controls">
+						<!-- Multiple Checkboxes -->
+						<label class="checkbox"> <input type="checkbox"
+							value="Option one"> Option one
+						</label> <label class="checkbox"> <input type="checkbox"
+							value="Option two"> Option two
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">File Button</label>
+					<!-- File Upload -->
+					<div class="controls">
+						<input class="input-file" id="fileInput" type="file">
+					</div>
+				</div>
+				<div class="control-group">
+					<!-- Textarea -->
+					<label class="control-label">Textarea</label>
+					<div class="controls">
+						<div class="textarea">
+							<textarea type="" class=""> </textarea>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>
