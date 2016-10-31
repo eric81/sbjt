@@ -54,6 +54,13 @@ public class UserRestAction {
 		return rs;
 	}
 	
+	@GetMapping(value = "/listByRoles")
+	public Page<User> listByRoles(@RequestParam String roles, @PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
+		logger.info("[user list] pageable=" + pageable);
+		Page<User> rs = this.sv.getUserListByRoles(roles, pageable);
+		return rs;
+	}
+	
 	@PostMapping(value = "/add")
 	public OperResult add(User user) {
 		logger.debug("[user add] user=" + user);

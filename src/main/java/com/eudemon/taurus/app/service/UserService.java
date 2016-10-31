@@ -27,6 +27,11 @@ public class UserService {
 		Page<User> rs = userDao.findAll(pageable);
 		return rs;
 	}
+	
+	public Page<User> getUserListByRoles(String roles, Pageable pageable) {
+		Page<User> rs = userDao.findByRoles(roles, pageable);
+		return rs;
+	}
 
 	public void addUser(User user) {
 		User us = userDao.saveAndFlush(user);
