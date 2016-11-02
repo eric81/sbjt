@@ -3,8 +3,6 @@ package com.eudemon.taurus.app.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,14 +26,11 @@ import com.eudemon.taurus.app.utils.JasonUtils;
 @Controller
 @RequestMapping(value = "/api/user")
 public class UserApiAction {
-	private Logger logger = LoggerFactory.getLogger(UserApiAction.class);
 	@Autowired
 	private UserService sv;
 
 	@GetMapping(value = "/{id}")
 	public void get(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[api user get] id=" + id);
-
 		User user = this.sv.getUser(id);
 
 		JasonUtils.writeJasonP(request, response, user);
@@ -54,8 +49,6 @@ public class UserApiAction {
 	@GetMapping(value = "/list")
 	public void list(@PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable, HttpServletRequest request,
 			HttpServletResponse response) {
-		logger.info("[api user list] pageable=" + pageable);
-
 		Page<User> rs = this.sv.getUserList(pageable);
 
 		JasonUtils.writeJasonP(request, response, rs);
@@ -63,7 +56,6 @@ public class UserApiAction {
 
 	@RequestMapping(value = "/add")
 	public void add(User user, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[api user add] user=" + user);
 		OperResult or = new OperResult();
 
 		sv.addUser(user);
@@ -74,7 +66,6 @@ public class UserApiAction {
 
 	@GetMapping(value = "/delete/{id}")
 	public void delete(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[api user delete] id=" + id);
 		OperResult or = new OperResult();
 
 		this.sv.delete(id);
@@ -84,7 +75,6 @@ public class UserApiAction {
 
 	@RequestMapping(value = "/modify")
 	public void modify(User user, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("[api user modify] user=" + user);
 		OperResult or = new OperResult();
 
 		this.sv.modify(user);

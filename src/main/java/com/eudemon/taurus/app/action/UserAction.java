@@ -27,13 +27,11 @@ import com.eudemon.taurus.app.service.UserService;
 @Controller
 @RequestMapping(value = "/user")
 public class UserAction {
-	private Logger logger = LoggerFactory.getLogger(UserAction.class);
 	@Autowired
 	private UserService sv;
 
 	@GetMapping(value = "/{id}")
 	public String get(@PathVariable int id, ModelMap model) {
-		logger.debug("[user get] id=" + id);
 		User user = this.sv.getUser(id);
 		model.addAttribute("user", user);
 		return "user/detail";
@@ -51,7 +49,6 @@ public class UserAction {
 	 */
 	@GetMapping(value = "/list")
 	public String list(@PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable, ModelMap model) {
-		logger.info("[user list] pageable=" + pageable);
 		Page<User> rs = this.sv.getUserList(pageable);
 		model.addAttribute("rs", rs);
 		return "user/list";
@@ -59,7 +56,6 @@ public class UserAction {
 	
 	@PostMapping(value = "/add")
 	public OperResult add(User user) {
-		logger.debug("[user add] user=" + user);
 		OperResult or = new OperResult();
 
 		sv.addUser(user);
@@ -70,7 +66,6 @@ public class UserAction {
 	
 	@GetMapping(value = "/delete/{id}")
 	public OperResult delete(@PathVariable int id) {
-		logger.debug("[user delete] id=" + id);
 		OperResult or = new OperResult();
 
 		this.sv.delete(id);
@@ -80,7 +75,6 @@ public class UserAction {
 	
 	@PostMapping(value = "/modify/{id}")
 	public OperResult modify(@PathVariable int id, @RequestParam String role, @RequestParam String permissions) {
-		logger.debug("[user modify] role=" + role);
 		OperResult or = new OperResult();
 
 		this.sv.modify(id, role, permissions);

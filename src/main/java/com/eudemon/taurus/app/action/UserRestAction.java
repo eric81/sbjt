@@ -1,7 +1,5 @@
 package com.eudemon.taurus.app.action;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,13 +24,11 @@ import com.eudemon.taurus.app.service.UserService;
 @RestController
 @RequestMapping(value = "/rest/user")
 public class UserRestAction {
-	private Logger logger = LoggerFactory.getLogger(UserRestAction.class);
 	@Autowired
 	private UserService sv;
 
 	@GetMapping(value = "/{id}")
 	public User get(@PathVariable int id) {
-		logger.debug("[user get] id=" + id);
 		User user = this.sv.getUser(id);
 		return user;
 	}
@@ -49,21 +45,20 @@ public class UserRestAction {
 	 */
 	@GetMapping(value = "/list")
 	public Page<User> list(@PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
-		logger.info("[user list] pageable=" + pageable);
 		Page<User> rs = this.sv.getUserList(pageable);
+		User[] aa = {};
+		aa[0].getName();
 		return rs;
 	}
 	
 	@GetMapping(value = "/listByRoles")
 	public Page<User> listByRoles(@RequestParam String roles, @PageableDefault(value = 10, sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable) {
-		logger.info("[user list] pageable=" + pageable);
 		Page<User> rs = this.sv.getUserListByRoles(roles, pageable);
 		return rs;
 	}
 	
 	@PostMapping(value = "/add")
 	public OperResult add(User user) {
-		logger.debug("[user add] user=" + user);
 		OperResult or = new OperResult();
 
 		sv.addUser(user);
@@ -74,7 +69,6 @@ public class UserRestAction {
 	
 	@GetMapping(value = "/delete/{id}")
 	public OperResult delete(@PathVariable int id) {
-		logger.debug("[user delete] id=" + id);
 		OperResult or = new OperResult();
 
 		this.sv.delete(id);
@@ -84,7 +78,6 @@ public class UserRestAction {
 	
 	@PostMapping(value = "/modify/{id}")
 	public OperResult modify(@PathVariable int id, @RequestParam String role, @RequestParam String permissions) {
-		logger.debug("[user modify] role=" + role);
 		OperResult or = new OperResult();
 
 		this.sv.modify(id, role, permissions);

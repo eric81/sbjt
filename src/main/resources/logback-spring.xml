@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<configuration debug="true" scan="true" scanPeriod="60 seconds">
+<configuration debug="false" scan="true" scanPeriod="60 seconds">
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
 	<appender name="debuglog"
@@ -43,11 +43,35 @@
 		</rollingPolicy>
 	</appender>
 	
-	<root level="info"/>
+	<appender name="actionlog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/sbjt_action.log</file>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} - %m%n</pattern>
+		</encoder>
+
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>info</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/xhrup_action_%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+	<root level="debug"/>
 	<logger name="org.springframework.web" level="debug" />
 	<logger name="druid.sql.Statement" level="debug" />
 	<logger name="com.eudemon.taurus.app" level="debug" >
 		<appender-ref ref="debuglog" />
+		<appender-ref ref="errorlog" />
+	</logger>
+	<logger name="com.eudemon.taurus.app.action" level="info" additivity="false">
+		<appender-ref ref="actionlog" />
 		<appender-ref ref="errorlog" />
 	</logger>
 	
