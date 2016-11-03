@@ -63,7 +63,9 @@
 		</rollingPolicy>
 	</appender>
 	
-	<root level="debug"/>
+	<root level="debug">
+		<appender-ref ref="errorlog" />
+	</root>
 	<logger name="org.springframework.web" level="debug" />
 	<logger name="druid.sql.Statement" level="debug" />
 	<logger name="com.eudemon.taurus.app" level="debug" >
